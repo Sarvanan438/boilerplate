@@ -6,6 +6,7 @@ import data from "./components/TreeSelect/data";
 import { createTreeDict } from "./components/TreeSelect/logic";
 import TreeComponent from "./components/TreeSelect/TreeSelect";
 import { useCallback, useMemo, useState } from "react";
+import Label from "./components/Label";
 console.log(JSON.stringify(createTreeDict(data)));
 const data2 = [
   {
@@ -54,8 +55,8 @@ function getNodeStatus(node, selections) {
   if (node.children.length === 0) return "unchecked";
 
   const res = node.children.reduce((acc, item) => {
-    acc += selections[item.id].status == "checked" ? 1 : 0;
-    if (item.id == 2) console.log("check", acc, selections[item.id].status);
+    const status = selections[item.id].status;
+    acc += status == "checked" ? 1 : status == "indeterminate" ? 0.5 : 0;
     return acc;
   }, 0);
 
@@ -105,7 +106,7 @@ export function App() {
     [selections, setSelections]
   );
   const selectedStatus = useMemo(
-    () => createSelectionTree(data2, selections),
+    () => createSelectionTree(data, selections),
     [selections]
   );
   console.log("selected", selections, selectedStatus);
@@ -113,28 +114,7 @@ export function App() {
     <GestureHandlerRootView>
       <SafeAreaProvider>
         <SafeAreaView style={styles.container}>
-          <View
-            style={{
-              height: 800,
-              flex: 1,
-            }}
-          >
-            <TreeComponent
-              data={data2}
-              containerStyle={{
-                minHeight: 300,
-                width: "100%",
-                flex: 1,
-                borderWidth: 1,
-              }}
-              listStyle={{
-                minWidth: 200,
-              }}
-              renderItem={(node) => <Text style={{}}>{node.value}</Text>}
-              onSelect={onSelect}
-              selections={selectedStatus}
-            />
-          </View>
+          <Label text="Hello" containerStyle={{ width: 200 }} />
         </SafeAreaView>
       </SafeAreaProvider>
     </GestureHandlerRootView>

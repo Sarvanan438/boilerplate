@@ -13,13 +13,18 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "associatedDomains": [
+        "applinks:3cbe-61-3-22-61.ngrok-free.app"
+      ],
+      "bundleIdentifier": "com.sarvanan.boilerplater"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.sarvanan.boilerplater"
     },
     "web": {
       "bundler": "metro",
